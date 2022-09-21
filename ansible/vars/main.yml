@@ -1,0 +1,8 @@
+---
+# Jenkins vars
+jenkins_key: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+jenkins_repo: deb https://pkg.jenkins.io/debian binary/
+
+# Java vars
+java_pre_requisties: software-properties-common
+java: openjdk-11-jre-headless

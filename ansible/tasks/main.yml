@@ -1,0 +1,64 @@
+---
+
+- name: Install pip, unzip
+  apt:
+    name: pip, unzip
+    update_cache: yes
+    state: latest
+
+- name: Install boto3 and botocore with pip
+  ansible.builtin.pip:
+    name: 
+      - boto3
+      - botocore
+    state: latest
+
+- name: Install awscli
+  ansible.builtin.get_url: 
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/awscliv2.zip
+    owner: ubuntu
+
+- name: Unarchive the installer
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src:  /tmp/awscliv2.zip
+    dest: /opt
+
+- name: Install awscli package
+  shell: bash /opt/aws/install
+
+- name: Add signing Jenkins signing key
+  apt_key:
+    url: "{{ jenkins_key }}"
+    state: present
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: "{{ jenkins_repo }}"
+    state: present
+
+- name: Install the java pre-requisties
+  apt:
+    name: "{{ java_pre_requisties }}"
+    update_cache: yes
+    state: latest
+
+- name: Install java
+  apt:
+    name: "{{ java }}"
+    update_cache: yes
+    state: present
+
+- name: Install Jenkins
+  apt:
+    name:
+    - jenkins
+    update_cache: yes
+    state: present
+
+- name: Start Jenkins
+  service:
+    name: jenkins
+    enabled: true
+    state: started

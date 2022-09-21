@@ -1,0 +1,7 @@
+---
+- hosts: default
+  become: true
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - import_tasks: tasks/main.yml
