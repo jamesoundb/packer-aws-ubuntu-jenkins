@@ -5,7 +5,7 @@ json_file = "/home/james/Packer_Templates/ubuntu-awscli/packer-manifest.json"
 
 
 def ami(file):
-    """Parses packer-manifest json file and returns region and latest build ami"""
+    """Parses packer-manifest json file and returns region and latest build AMI ID"""
     with open(file, "r") as file:
         f = file.read()
         manifest = json.loads(f)
