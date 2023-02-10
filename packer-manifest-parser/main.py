@@ -1,8 +1,7 @@
 #! /usr/bin/env python3
 import json
 
-json_file = "/home/james/Packer_Templates/ubuntu-awscli/packer-manifest.json"
-
+json_file = "../packer-manifest.json"
 
 def ami(file):
     """Parses packer-manifest json file and returns region and latest build AMI ID"""
